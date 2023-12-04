@@ -114,7 +114,7 @@ class VoltageOut:
 
         """
         self._calibration[min_voltage] = 0
-        self._calibration[max_voltage] = 65535
+        self._calibration[max_voltage] = 4095
 
         self._calibration_keys = sorted(self._calibration.keys())
 
@@ -134,7 +134,7 @@ class VoltageOut:
                 0.825: 16000,
                 1.65: 32723,
                 2.475: 49230,
-                3.3, 65535,
+                3.3, 4095,
             })
 
         You can keep adding more calibration points as needed to counteract
@@ -161,7 +161,7 @@ class VoltageOut:
 
         lerped = round(low_val + ((high_val - low_val) * normalized_offset))
 
-        return min(lerped, 65535)
+        return min(lerped, 4095)
 
     def _get_voltage(self):
         return self._voltage
@@ -210,7 +210,7 @@ class VoltageIn:
 
         """
         self._calibration[0] = 0
-        self._calibration[65535] = max_voltage
+        self._calibration[4095] = max_voltage
 
         self._calibration_keys = sorted(self._calibration.keys())
 
@@ -230,7 +230,7 @@ class VoltageIn:
                 16000: 1.0,
                 32723: 2.0,
                 49230: 3.0,
-                65535: 4.0,
+                4095: 4.0,
             })
         """
         self._calibration.update(calibration)
